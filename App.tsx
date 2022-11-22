@@ -12,20 +12,6 @@ import {
 import { API_KEY as apiKey } from './config';
 import { MotiView } from 'moti';
 
-export interface IResponse {
-  alt: string;
-  avg_color: string;
-  height: string;
-  id: string;
-  liked: boolean;
-  photographer: string;
-  photographer_id: string;
-  photographer_url: string;
-  src: any;
-  url: string;
-  width: string;
-}
-
 const API_KEY = apiKey;
 const IMAGE_SIZE = 80;
 const SPACING = 10;
@@ -92,7 +78,7 @@ export default () => {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff' }}>
-      <StatusBar translucent backgroundColor="transparent" />
+      <StatusBar translucent backgroundColor="#00000077" />
       <FlatList
         ref={topRef}
         data={images}
