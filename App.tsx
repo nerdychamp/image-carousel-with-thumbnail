@@ -18,11 +18,11 @@ const IMAGE_SIZE = 80;
 const SPACING = 10;
 const { width, height } = Dimensions.get('screen');
 
-// const API_KEY = apiKey;
+// const API_KEY = apiKey; // use your api key or load from hard data
 // const API_URL =
 //   'https://api.pexels.com/v1/search?query=nature&orientation=portrait&size=small&per_page=20';
 
-const fetchImageFromPexels = async () => {
+async function fetchImageFromPexels(): Promise<IImages[]> {
   // const data = await fetch(API_URL, {
   //   headers: {
   //     Authorization: API_KEY,
@@ -32,18 +32,18 @@ const fetchImageFromPexels = async () => {
   // const { photos } = await data.json();
   const photos = imagesData;
   return photos;
-};
+}
 
 export default () => {
-  const [images, setImages] = React.useState(null);
+  const [images, setImages] = React.useState<IImages[]>([]);
   const [activeIndex, setActiveIndex] = React.useState<number>(0);
-  const topRef = React.useRef(null);
-  const thumbRef = React.useRef(null);
+  const topRef = React.useRef<FlatList<IImages>>(null);
+  const thumbRef = React.useRef<FlatList<IImages>>(null);
 
   React.useEffect(() => {
     const fetchImages = async () => {
       const images = await fetchImageFromPexels();
-      setImages(images);
+      setImages([...images]);
     };
     fetchImages();
   }, []);
@@ -51,7 +51,7 @@ export default () => {
   const scrollToActiveIndex = (index: number) => {
     setActiveIndex(index);
     // scroll flatlists
-    topRef?.current.scrollToOffset({
+    topRef?.current?.scrollToOffset({
       offset: index * width,
       animated: true,
     });
