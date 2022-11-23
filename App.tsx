@@ -11,22 +11,26 @@ import {
 } from 'react-native';
 import { API_KEY as apiKey } from './config';
 import { MotiView } from 'moti';
+import { imagesData } from './data';
+import type { IImages } from './data';
 
-const API_KEY = apiKey;
 const IMAGE_SIZE = 80;
 const SPACING = 10;
 const { width, height } = Dimensions.get('screen');
-const API_URL =
-  'https://api.pexels.com/v1/search?query=nature&orientation=portrait&size=small&per_page=20';
+
+// const API_KEY = apiKey;
+// const API_URL =
+//   'https://api.pexels.com/v1/search?query=nature&orientation=portrait&size=small&per_page=20';
 
 const fetchImageFromPexels = async () => {
-  const data = await fetch(API_URL, {
-    headers: {
-      Authorization: API_KEY,
-    },
-  });
+  // const data = await fetch(API_URL, {
+  //   headers: {
+  //     Authorization: API_KEY,
+  //   },
+  // });
 
-  const { photos } = await data.json();
+  // const { photos } = await data.json();
+  const photos = imagesData;
   return photos;
 };
 
@@ -39,7 +43,6 @@ export default () => {
   React.useEffect(() => {
     const fetchImages = async () => {
       const images = await fetchImageFromPexels();
-
       setImages(images);
     };
     fetchImages();
